@@ -111,3 +111,33 @@ export const totalPaid = (data) => {
 
     return total
 }
+
+
+export const result = async ( token, data, setResults, setError, setFiltering ) => {
+
+    setFiltering(true);
+
+    try{
+        const response = await axios.post('result',
+            data,
+            {
+                headers: { 'Accept' : 'application/json', 'Authorization' : `Bearer ${token}` }
+            }
+        );
+        
+        console.log(response.data.result);
+        setResults(response.data.result);
+
+    }
+    catch (err) {
+        if (!err?.response) {
+            setError('No Response from Server');
+        } else {
+            console.log(err.response.data);
+            setError(err.response.data?.message);
+        }
+    }
+
+    setFiltering(false);
+    
+}

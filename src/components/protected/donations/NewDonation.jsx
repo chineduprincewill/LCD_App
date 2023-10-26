@@ -16,6 +16,7 @@ import { createDonation } from '../../../actions/donationsActions';
 import { AuthContext } from '../../../context/AuthContex';
 import NextSearch from './NextSearch';
 import MemberDetail from '../members/MemberDetail';
+import DonationsLog from './DonationsLog';
 
 export const NewDonation = () => {
 
@@ -27,6 +28,7 @@ export const NewDonation = () => {
     const [event, setEvent] = useState('');
     const [year, setYear] = useState('');
     const [donation, setDonation] = useState('');
+    const [redeemed, setRedeemed] = useState(0);
     const [completepay, setCompletepay] = useState('');
     const [recorder, setRecorder] = useState('self');
     const [memberName, setMemberName] = useState('');
@@ -46,6 +48,9 @@ export const NewDonation = () => {
     const [irecorded, setIrecorded] = useState(true);
     const [showdetail, setShowdetail] = useState(false);
     const [memberid, setMemberid] = useState();
+
+    const [currpayload, setCurrpayload] = useState({});
+    const [payloadsArr, setPayloadsArr] = useState([]);
 
     const restart = () => {
         setSearch('event');
@@ -74,11 +79,9 @@ export const NewDonation = () => {
         if(val === 'event'){
             setEvent('');
         }
-
         if(val === 'year'){
             setYear('');
         }
-        
         setSearch(val);
     }
 
@@ -92,18 +95,15 @@ export const NewDonation = () => {
         if(val === 'member'){
             setMember('')
         }
-
         setSearch(val);
     }
 
     if(search !== null){
-
         if(search === 'event'){
             stage = <div className='flex'>
                 <FilterEvents setEvent={setEvent} /> 
                 <NextSearch search={search} updateSearch={updateSearch} val={'event'} btnText={'back'} />
                 <AiOutlinePlus size={20} className="mt-2 text-green-500 cursor-pointer" onClick={setNewevent} title="create new event" /></div>;
-
             if(event !== ''){
                 setSearch('year');
             }
@@ -113,7 +113,6 @@ export const NewDonation = () => {
                 <FilterYears setYear={setYear} />
                 <NextSearch search={search} updateSearch={updateSearch} val={'event'} btnText={'back'} />
             </div>
-
             if(year !== ''){
                 setSearch('member');
             }
@@ -133,20 +132,19 @@ export const NewDonation = () => {
             alert('All form fields must be filled!');
         }
         else{
-
             arg === 'notOnPage' && setStayOnPage(false);
-
             const data = {
                 member,
+                memberName,
                 event,
                 year,
                 donation,
+                redeemed,
                 completepay,
                 recorder
             }
-
             if(window.confirm('Are you sure you have confirmed your entries? You will not be able to edit once you have submitted.')){
-
+                setCurrpayload(data);
                 createDonation(token, data, setSuccess, setError, setSubmitting);
             }
         }
@@ -157,17 +155,22 @@ export const NewDonation = () => {
         setSuccess(null);
         setMember('');
         setMemberName('');
+        setCompletepay('');
+        setRedeemed(0);
 
         if(stayOnPage){
             setSearch('member');
-            setIsSuccessful(true);
+            setIsSuccessful(true);  
+            
+            setPayloadsArr(payloadsArr => [
+                currpayload,
+                ...payloadsArr,
+            ])
         }
         else{
             navigate('/donations')
         }
-
     }
-
 
     useEffect(() => {
         irecorded ? setRecorder('self') : setRecorder('');
@@ -181,6 +184,7 @@ export const NewDonation = () => {
                 <Sidebar />
                 <div className='w-full col-span-8 lg:col-span-7 px-4 lg:px-10'>
                     <Pagetitle icon={<FaDonate />} />
+                    {/** DONATIONS LIST SECTION */}
                     <div className='w-full my-4'>
                         <div className='flex justify-end border-b border-gray-200 dark:border-gray-800 pb-4'>
                             <Link
@@ -192,6 +196,7 @@ export const NewDonation = () => {
                         </div>
                     </div>
 
+                    {/** NOTIFICATIONS AND SELECTION FIELDS SECTION */}
                     <div className='py-0.5'>
                         <p className='rounded-md text-sm bg-gray-100 text-slate-500 dark:bg-gray-900 dark:text-gray-300 border border-gray-200 dark:border-gray-800 p-3 mb-5 font-bold'>If you cannot find what you searched for in the dropdown that appears when you type, please click on the green plus icon to add it. <span className='text-yellow-600'>Note that selection fields change after each selection</span></p>
                         <div className='md:flex md:justify-between md:items-center space-y-6 md:space-y-0'>
@@ -207,7 +212,9 @@ export const NewDonation = () => {
 
                     {error && <span className='py-3 text-red-500'>{error}</span>}
 
+                    {/** DONATION FORM SECTION */}
                     <div className='w-full grid grid-cols-1 md:grid-cols-2 my-12 py-4 border-t border-gray-200 dark:border-gray-900 '>
+                        {/** SELECTIONS DISPLAY SECTION */}
                         <div className='col-span-1 space-y-8 mt-3 md:border-r border-gray-300 dark:border-gray-900'>
                             {event !== '' && 
                                 <div className='grid grid-cols-5'>
@@ -267,6 +274,7 @@ export const NewDonation = () => {
                                 </div>
                             }
                         </div>
+                        {/** MAIN DONATION FORM SECTION */}
                         <div className='col-span-1 space-y-4 mt-6 md:mt-0 md:px-6'>
                             {(event !== '' && year !== '' && member !== '') && 
                                 <Fragment>
@@ -290,7 +298,18 @@ export const NewDonation = () => {
                                             <option value="no">no</option>
                                         </select>
                                     </div>
-                                    
+                                    {
+                                        completepay === 'no' && 
+                                            <div className='grid'>
+                                                <input
+                                                    type="number"
+                                                    className="w-full md:w-[450px] bg-transparent p-2 border-b border-gray-400 dark:border-slate-600 dark:text-gray-500"
+                                                    placeholder="How much was paid?"
+                                                    onChange={(e) => setRedeemed(e.target.value)}
+                                                />
+                                                <small className='my-1 text-gray-500'>Leave blank if nothing was paid</small>
+                                            </div>
+                                    }
                                     <div className='flex justify-start space-x-8 p-2'>
                                         <span>Are you the recorder? <span className='text-sm text-gray-500 ml-2'>{irecorded ? 'Yes' : 'No'}</span></span>
                                         <span 
@@ -334,6 +353,9 @@ export const NewDonation = () => {
                             }
                         </div>
                     </div>
+
+                    {/** LIST OF CURRENTLY SUBMITTED DONATION */}
+                    <DonationsLog payloadsArr={payloadsArr} />
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ import { FaDonate } from "react-icons/fa";
 import { AuthContext } from '../../../context/AuthContex';
 import { checkRole } from '../../../Hooks/functions';
 import { Link, useLocation } from 'react-router-dom';
+import { MdOutlineTask } from 'react-icons/md';
 
 const NavDB = () => {
 
@@ -49,6 +50,12 @@ const NavDB = () => {
         icon: <HiOutlineUserGroup className="nav-icon" />,
         url: '/users',
       },
+      {
+        id: 6,
+        title: "Results",
+        icon: <MdOutlineTask className="nav-icon" />,
+        url: '/results',
+      },
     ];
     
     const system_auditor = [
@@ -88,6 +95,12 @@ const NavDB = () => {
         icon: <HiOutlineUserGroup className="nav-icon" />,
         url: '/users',
       },
+      {
+        id: 6,
+        title: "Results",
+        icon: <MdOutlineTask className="nav-icon" />,
+        url: '/results',
+      },
     ];
     
     const admin = [
@@ -121,6 +134,12 @@ const NavDB = () => {
         icon: <HiOutlineUserGroup className="nav-icon" />,
         url: '/users',
       },
+      {
+        id: 6,
+        title: "Results",
+        icon: <MdOutlineTask className="nav-icon" />,
+        url: '/results',
+      },
     ]
 
     const auditor = [
@@ -153,6 +172,12 @@ const NavDB = () => {
         title: "Users",
         icon: <HiOutlineUserGroup className="nav-icon" />,
         url: '/users',
+      },
+      {
+        id: 6,
+        title: "Results",
+        icon: <MdOutlineTask className="nav-icon" />,
+        url: '/results',
       },
     ]
 

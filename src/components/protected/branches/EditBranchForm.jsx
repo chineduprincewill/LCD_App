@@ -66,6 +66,7 @@ const EditBranchForm = ({ brnch, setEditBranch }) => {
                                 >
                                     <option value="">select category</option>
                                     <option value="Branch">Branch</option>
+                                    <option value="Fellowship center">Fellowship center</option>
                                     <option value="Group">Group</option>
                                 </select>
                                 <input 

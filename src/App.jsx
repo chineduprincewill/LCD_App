@@ -12,6 +12,7 @@ import Members from './components/protected/members/Members'
 import Users from './components/protected/users/Users';
 import Donations from './components/protected/donations/Donations'
 import NewDonation from './components/protected/donations/NewDonation'
+import Results from './components/protected/results/Results';
 
 const App = () => {
     return (
@@ -29,6 +30,7 @@ const App = () => {
                 <Route exact path='/users' element={<PrivateRoute><Users /></PrivateRoute>} />
                 <Route exact path='/donations' element={<PrivateRoute><Donations /></PrivateRoute>} />
                 <Route exact path='/new-donation' element={<PrivateRoute><NewDonation /></PrivateRoute>} />
+                <Route exact path='/results' element={<PrivateRoute><Results /></PrivateRoute>} />
               </Routes>
             </Router>
           </DataContextProvider>

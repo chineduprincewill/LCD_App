@@ -144,7 +144,6 @@ const EditMemberForm = ({ membr, setEditMember }) => {
                                 <div className='flex justify-between'>
                                     <select
                                         className="w-full bg-transparent m-3 p-2 border-b border-slate-500"
-                                        value={branchid}
                                         onChange={(e) => setBranchid(e.target.value)}
                                         required
                                     >

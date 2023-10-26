@@ -139,6 +139,7 @@ export const NewmemberForm = ({ setForm, setIsCreated }) => {
                                         onChange={(e) => setBranchid(e.target.value)}
                                         required
                                     >
+                                        <option value="">select branch/fellowship center</option>
                                         <option value={user && user.groupid}>{user && user.groupname}</option>
                                         <BranchesList />
                                     </select>
