@@ -2,9 +2,11 @@ import React from 'react'
 import PublicHeader from './PublicHeader'
 import homeBanner from '../assets/home-banner.png';
 import Banner from './common/Banner';
-import Footer from './common/Footer';
+import Footer from './common/Footer'
 
 const AboutUs = () => {
+
+
     return (
         <div className='h-screen'>
             <PublicHeader />
