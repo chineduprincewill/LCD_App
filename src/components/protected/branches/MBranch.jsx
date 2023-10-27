@@ -2,11 +2,11 @@ import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit, AiOutlineMail } from 'react-icons/ai';
 import { HiMinus, HiOutlineTrash, HiPlus } from 'react-icons/hi';
 import { BsTelephone } from 'react-icons/bs';
-import Moment from 'react-moment';
 import { AuthContext } from '../../../context/AuthContex'
 import EditBranchForm from './EditBranchForm';
 import { DataContext } from '../../../context/DataContext';
 import { deleteBranch } from '../../../actions/branchesActions'; 
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const MBranch = ({ brnch }) => {
 
@@ -104,7 +104,7 @@ const MBranch = ({ brnch }) => {
                             </span>
                         </div>
                         <div className='flex  justify-start'>
-                            <Moment format='MMMM Do YYYY'>{brnch.created_at}</Moment>
+                            {formatDateWithFullMonthName(brnch.created_at)}
                         </div>
                     </div>
                 </div>

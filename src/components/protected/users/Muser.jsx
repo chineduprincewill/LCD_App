@@ -2,11 +2,11 @@ import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit, AiOutlineMail } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { HiMinus, HiOutlineTrash, HiPlus } from 'react-icons/hi';
-import Moment from 'react-moment';
 import { deleteUser } from '../../../actions/usersActions';
 import { AuthContext } from '../../../context/AuthContex';
 import { DataContext } from '../../../context/DataContext';
 import EditUserForm from './EditUserForm';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const Muser = ({ usr }) => {
 
@@ -111,7 +111,7 @@ const Muser = ({ usr }) => {
                             </span>
                         </div>
                         <div className='flex justify-end'>
-                            <Moment format='MMMM Do YYYY'>{usr.created_at}</Moment>
+                            {formatDateWithFullMonthName(usr.created_at)}
                         </div>
                     </div>
                 </div>

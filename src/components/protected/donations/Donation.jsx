@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
-import Moment from 'react-moment'
 import Redemptions from '../redemptions/Redemptions';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const Donation = ({ dntn }) => {
 
@@ -21,7 +21,7 @@ const Donation = ({ dntn }) => {
                 <td className='py-3 px-3 whitespace-nowrap'>{dntn.event}, {dntn.event_year}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>&#8358; {dntn.donation}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>&#8358; {dntn.redeemed}</td>
-                <td className='py-3 px-3 whitespace-nowrap'><Moment format='MMMM Do YYYY'>{dntn.created_at}</Moment></td>
+                <td className='py-3 px-3 whitespace-nowrap'>{formatDateWithFullMonthName(dntn.created_at)}</td>
                 <td className='py-3 px-3 whitespace-nowrap flex'>
                     <Fragment>
                         <span 

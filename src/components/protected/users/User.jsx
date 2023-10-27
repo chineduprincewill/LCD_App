@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
-import Moment from 'react-moment';
 import { deleteUser } from '../../../actions/usersActions';
 import { AuthContext } from '../../../context/AuthContex';
 import { DataContext } from '../../../context/DataContext';
 import EditUserForm from './EditUserForm';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const User = ({ usr }) => {
 
@@ -47,7 +47,7 @@ const User = ({ usr }) => {
                 <td className='py-3 px-3 whitespace-nowrap'>{usr.mobile}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>{usr.email}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>{usr.groupname}</td>
-                <td className='py-3 px-3 whitespace-nowrap'><Moment format='MMMM Do YYYY'>{usr.created_at}</Moment></td>
+                <td className='py-3 px-3 whitespace-nowrap'>{formatDateWithFullMonthName(usr.created_at)}</td>
                 <td className='py-3 px-3 whitespace-nowrap flex'>
                     {(user && user.groupid === 0 && user.role === 'admin') &&
                         <Fragment>

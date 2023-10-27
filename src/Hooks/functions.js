@@ -29,3 +29,15 @@ export const formatPosition = (position) => {
         return 'th'
     }
 }
+
+
+export const formatDateWithFullMonthName = (dt) => {
+    const date = new Date(dt);
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
+    const month = date.getMonth();
+    const day = date.getDate();
+    const year = date.getFullYear();
+  
+    return `${monthNames[month]} ${day}, ${year}`;
+}

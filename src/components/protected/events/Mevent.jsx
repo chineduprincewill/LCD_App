@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai';
 import { HiMinus, HiOutlineTrash, HiPlus } from 'react-icons/hi';
-import Moment from 'react-moment';
 import { deleteEvent } from '../../../actions/eventsActions';
 import { AuthContext } from '../../../context/AuthContex';
 import { DataContext } from '../../../context/DataContext';
 import EditEventForm from './EditEventForm';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const Mevent = ({ evnt }) => {
 
@@ -92,7 +92,7 @@ const Mevent = ({ evnt }) => {
                     <div className='col-span-1'></div>
                     <div className='col-span-9 text-xs space-y-2 text-gray-500 border-t border-gray-300 dark:border-gray-900 py-3'>
                         <div className='flex  justify-start'>
-                            created on &nbsp;<Moment format='MMMM Do YYYY'>{evnt.created_at}</Moment>
+                            created on &nbsp;{formatDateWithFullMonthName(evnt.created_at)}
                         </div>
                     </div>
                 </div>

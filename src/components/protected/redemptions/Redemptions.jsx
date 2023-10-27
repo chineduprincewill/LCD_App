@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import Moment from 'react-moment';
 import { getDonationRedemptions, redeemDonation } from '../../../actions/redemptionsActions';
 import { AuthContext } from '../../../context/AuthContex';
 import { DataContext } from '../../../context/DataContext';
 import Spinner from '../../../widgets/Spinner';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const Redemptions = ({ donation, setForm }) => {
 
@@ -167,7 +167,7 @@ const Redemptions = ({ donation, setForm }) => {
                                                         <div key={rdm.id} className='w-full p-2 grid grid-cols-4 text-sm my-2 border border-gray-300 rounded-md'>
                                                             <span className='col-span-1 text-left'>&#8358;{rdm.amount}</span>
                                                             <span className='col-span-1 text-left'>{rdm.channel}</span>
-                                                            <span className='col-span-1 text-left'><Moment format='MMMM Do YYYY'>{rdm.received_on}</Moment></span>
+                                                            <span className='col-span-1 text-left'>{formatDateWithFullMonthName(rdm.received_on)}</span>
                                                             <span className='col-span-1 text-left'>{rdm.received_by}</span>
                                                         </div>
                                                     )

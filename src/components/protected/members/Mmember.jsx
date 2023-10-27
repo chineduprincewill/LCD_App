@@ -2,11 +2,11 @@ import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit, AiOutlineMail } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { HiMinus, HiOutlineTrash, HiPlus } from 'react-icons/hi';
-import Moment from 'react-moment';
 import { deleteMember } from '../../../actions/membersActions';
 import { AuthContext } from '../../../context/AuthContex';
 import { DataContext } from '../../../context/DataContext';
 import EditMemberForm from './EditMemberForm';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const Mmember = ({ membr }) => {
 
@@ -124,7 +124,7 @@ const Mmember = ({ membr }) => {
                             </span>
                         </div>
                         <div className='flex justify-end'>
-                            <Moment format='MMMM Do YYYY'>{membr.created_at}</Moment>
+                            {formatDateWithFullMonthName(membr.created_at)}
                         </div>
                     </div>
                 </div>

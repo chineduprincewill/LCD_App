@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { HiOutlineTrash } from 'react-icons/hi'
-import Moment from 'react-moment'
 import { deleteEvent } from '../../../actions/eventsActions'
 import { AuthContext } from '../../../context/AuthContex'
 import { DataContext } from '../../../context/DataContext'
 import EditEventForm from './EditEventForm'
+import { formatDateWithFullMonthName } from '../../../Hooks/functions'
 
 const Event = ({ evnt }) => {
 
@@ -43,7 +43,7 @@ const Event = ({ evnt }) => {
         <Fragment>
             <tr className="px-1 even:bg-gray-100 odd:bg-white dark:odd:bg-transparent dark:even:bg-[#0b1425]">
                 <td className='py-3 px-3 whitespace-nowrap'>{evnt.title}</td>
-                <td className='py-3 px-3 whitespace-nowrap'><Moment format='MMMM Do YYYY'>{evnt.created_at}</Moment></td>
+                <td className='py-3 px-3 whitespace-nowrap'>{formatDateWithFullMonthName(evnt.created_at)}</td>
                 <td className='py-3 px-3 whitespace-nowrap flex'>
                     {(user && user.role === 'admin') &&
                         <Fragment>

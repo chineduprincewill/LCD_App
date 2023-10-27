@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { HiOutlineTrash } from 'react-icons/hi'
-import Moment from 'react-moment'
 import { deleteBranch } from '../../../actions/branchesActions'
 import { DataContext } from '../../../context/DataContext'
 import EditBranchForm from './EditBranchForm'
 import { AuthContext } from '../../../context/AuthContex'
+import { formatDateWithFullMonthName } from '../../../Hooks/functions'
 
 const Branch = ({ brnch }) => {
 
@@ -46,7 +46,7 @@ const Branch = ({ brnch }) => {
                 <td className='py-3 px-3 whitespace-nowrap'>{brnch.title}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>{brnch.mobile}</td>
                 <td className='py-3 px-3 whitespace-nowrap'>{brnch.email}</td>
-                <td className='py-3 px-3 whitespace-nowrap'><Moment format='MMMM Do YYYY'>{brnch.created_at}</Moment></td>
+                <td className='py-3 px-3 whitespace-nowrap'>{formatDateWithFullMonthName(brnch.created_at)}</td>
                 <td className='py-3 px-3 whitespace-nowrap flex'>
                     {(user && user.groupid === 0 && user.role === 'admin') &&
                         <Fragment>

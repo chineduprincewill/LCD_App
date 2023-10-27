@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { getMember } from '../../../actions/membersActions';
 import { AuthContext } from '../../../context/AuthContex';
-import Moment from 'react-moment';
 import ModalLoader from '../../common/ModalLoader';
+import { formatDateWithFullMonthName } from '../../../Hooks/functions';
 
 const MemberDetail = ({ setShowdetail, id }) => {
 
@@ -52,7 +52,7 @@ const MemberDetail = ({ setShowdetail, id }) => {
                                                 <div className='col-span-2 text-gray-700 break-all font-semibold'>
                                                     {
                                                         key === 'created_at' || key === 'updated_at' ? 
-                                                        <Moment format='MMMM Do YYYY'>{member[key]}</Moment> :
+                                                        formatDateWithFullMonthName(member[key]) :
                                                         member[key]
                                                     }
                                                 </div>

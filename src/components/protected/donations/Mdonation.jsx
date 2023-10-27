@@ -2,8 +2,8 @@ import React, { Fragment, useState } from 'react'
 import { AiOutlineMail, AiOutlineOrderedList, AiOutlineUser } from 'react-icons/ai'
 import { BsTelephone } from 'react-icons/bs'
 import { HiMinus, HiPlus } from 'react-icons/hi'
-import Moment from 'react-moment'
 import Redemptions from '../redemptions/Redemptions'
+import { formatDateWithFullMonthName } from '../../../Hooks/functions'
 
 const Mdonation = ({ dntn }) => {
 
@@ -85,7 +85,7 @@ const Mdonation = ({ dntn }) => {
                             </span>
                         </div>
                         <div className='flex justify-end'>
-                            <Moment format='MMMM Do YYYY'>{dntn.created_at}</Moment>
+                            {formatDateWithFullMonthName(dntn.created_at)}
                         </div>
                     </div>
                 </div>
