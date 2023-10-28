@@ -23,18 +23,21 @@ const ImportModal = ({ setImportModal }) => {
 
 
     const importDoc = () => {
-        console.log(doc);
-        let formData = new FormData();
-        formData.append('donations_file',doc);
-
-        console.log(formData);
-
-        importDonations(token, formData, setSuccess, setError, setImporting)
+        if(doc === null){
+            alert('No file was selected!');
+        }
+        else{
+            let formData = new FormData();
+            formData.append('donations_file',doc);
+    
+            importDonations(token, formData, setSuccess, setError, setImporting)
+        }
     }
 
     if(success !== null){
         alert(success);
         setSuccess(null);
+        setImportModal(false);
     }
 
 
