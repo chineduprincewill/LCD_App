@@ -14,6 +14,8 @@ import PrivateHeader from '../PrivateHeader'
 import Sidebar from '../sidebar/Sidebar'
 import MembersList from './MembersList'
 import NewmemberForm from './NewmemberForm'
+import { AiOutlineFileExcel } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 const columns = [
     {
@@ -62,6 +64,8 @@ const Members = () => {
 
     const { token, logout, user, role } = useContext(AuthContext);
     const { record } = useContext(DataContext);
+
+    const navigate = useNavigate();
 
     const [members, setMembers] = useState(null);
     const [totalItems, setTotalItems] = useState(0);
@@ -140,15 +144,16 @@ const Members = () => {
                             {(members !== null && members !== undefined && members.length > 0) && 
                                 <div className='w-full flex md:justify-end my-4'>
                                     <Search onSearch={ (value) => {
-                                        setSearch(value);
-                                }} />
+                                            setSearch(value);
+                                        }} 
+                                    />
                                 </div>
                             }
                             {/* Display an add button if user has enough privilege*/}
                             {(user && role === 'admin') &&
                                 <div className='flex md:justify-end my-2'>
                                     <button
-                                        className='w-[120px] bg-red-700 hover:bg-red-900 text-white p-3 rounded-full flex justify-center items-center space-x-1'
+                                        className='w-[120px] bg-red-700 hover:bg-red-900 text-white p-3 rounded-full flex justify-center items-center space-x-1 drop-shadow-xl'
                                         onClick={showForm}
                                     >
                                         <BsPlusLg size={15} className="mt-1" /><span>Member</span>
@@ -158,12 +163,25 @@ const Members = () => {
                         </div>
                         
                         {/* NUM ROWS AND PAGINATION COMPONENTS */}
-                        <div className='w-full flex justify-between mt-8 mb-4'>
+                        <div className='w-full md:flex md:justify-between mt-8 mb-4 space-y-4 md:space-y-0'>
                             {(members !== null && members !== undefined && members.length > 0) && 
-                                <NumRows 
-                                    data={members} 
-                                    setItemsPerPage={setItemsPerPage}
-                                />
+                                <div className='flex space-x-4 items-center'>
+                                    <NumRows 
+                                        data={members} 
+                                        setItemsPerPage={setItemsPerPage}
+                                    />
+
+                                    <button 
+                                        className='px-3 py-2.5 rounded-md border border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
+                                        onClick={() => navigate('/export-members')}
+                                    >
+                                        <div className='flex items-center space-x-1'>
+                                            <AiOutlineFileExcel size={15} />
+                                            <span>Export Members</span>
+                                        </div>
+                                    </button>
+                                </div>
+                                
                             }
 
                             <Pagination 

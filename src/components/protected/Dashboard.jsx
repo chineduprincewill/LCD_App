@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContex'
+//import { AuthContext } from '../../context/AuthContex'
 import Sidebar from './sidebar/Sidebar'
 import Pagetitle from '../../widgets/Pagetitle'
 import SuperAdmin from './dashboard/SuperAdmin'
@@ -8,7 +8,7 @@ import { AiOutlineDashboard } from 'react-icons/ai'
 
 const Dashboard = () => {
 
-    const { user } = useContext(AuthContext)
+    //const { user } = useContext(AuthContext)
     return (
         <div>
             <PrivateHeader />
@@ -16,7 +16,7 @@ const Dashboard = () => {
                 <Sidebar />
                 <div className='w-full lg:col-span-7 lg:px-10'>
                     <Pagetitle icon={<AiOutlineDashboard />} />
-                    {(user && user.groupid === 0 && user.role === 'admin') && <SuperAdmin />}
+                    <SuperAdmin />
                 </div>
             </div>  
         </div>

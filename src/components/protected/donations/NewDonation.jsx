@@ -17,6 +17,7 @@ import { AuthContext } from '../../../context/AuthContex';
 import NextSearch from './NextSearch';
 import MemberDetail from '../members/MemberDetail';
 import DonationsLog from './DonationsLog';
+import ImportModal from './ImportModal';
 
 export const NewDonation = () => {
 
@@ -51,6 +52,7 @@ export const NewDonation = () => {
 
     const [currpayload, setCurrpayload] = useState({});
     const [payloadsArr, setPayloadsArr] = useState([]);
+    const [importModal, setImportModal] = useState(false);
 
     const restart = () => {
         setSearch('event');
@@ -150,6 +152,11 @@ export const NewDonation = () => {
         }
     }
 
+
+    const toggleImportModal = () => {
+        setImportModal(true);
+    }
+
     if(success !== null){
         alert(success);
         setSuccess(null);
@@ -201,12 +208,21 @@ export const NewDonation = () => {
                         <p className='rounded-md text-sm bg-gray-100 text-slate-500 dark:bg-gray-900 dark:text-gray-300 border border-gray-200 dark:border-gray-800 p-3 mb-5 font-bold'>If you cannot find what you searched for in the dropdown that appears when you type, please click on the green plus icon to add it. <span className='text-yellow-600'>Note that selection fields change after each selection</span></p>
                         <div className='md:flex md:justify-between md:items-center space-y-6 md:space-y-0'>
                             {stage} 
-                            <button 
-                                className='w-[80px] p-1.5 bg-red-700 hover:bg-red-900 text-white rounded-full'
-                                onClick={(e) => restart()}
-                            >
-                                Cancel
-                            </button>
+                            <div className='flex items-center space-x-3'>
+                                <button 
+                                    className='px-6 py-1.5 bg-green-700 hover:bg-green-900 text-white rounded-full'
+                                    onClick={(e) => toggleImportModal()}
+                                >
+                                    Import from Excel
+                                </button>
+                                <button 
+                                    className='w-[80px] p-1.5 bg-red-700 hover:bg-red-900 text-white rounded-full'
+                                    onClick={(e) => restart()}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                            
                         </div>    
                     </div>
 
@@ -362,6 +378,7 @@ export const NewDonation = () => {
             {newevent && <NeweventForm setForm={setNewevent} setIsCreated={setIsCreated} />}
             {newmember && <NewmemberForm setForm={setNewmember} setIsCreated={setIsCreated} />}
             {showdetail && <MemberDetail setShowdetail={setShowdetail} id={memberid} />}
+            {importModal && <ImportModal setImportModal={setImportModal} />}
         </div>
     )
 }

@@ -15,6 +15,7 @@ import MBranchesList from './MBranchesList';
 import BranchesList from './BranchesList';
 import Spinner from '../../../widgets/Spinner';
 import Pagination from '../../../widgets/Pagination';
+import Footer from '../../common/Footer';
 
 const columns = [
     {
@@ -200,6 +201,7 @@ const Branches = () => {
                             onPageChange={page => setCurrentPage(page)}
                         />
                     </div>
+                    <Footer />
                 </div>
             </div>  
 

@@ -159,3 +159,26 @@ export const deleteMember = async (token, id, setSuccess, setError ) => {
         }
     }
 }
+
+
+export const exportMembersToCSV = async (token, data, setSuccess, setError ) => {
+
+    try{
+
+        const response = await axios.post('members/export',
+            data,
+            {
+                headers: { 'Accept' : 'application/json', 'Authorization' : `Bearer ${token}` }
+            }
+        );
+
+        setSuccess(response.data);
+
+    } catch (err) {
+        if (!err?.response) {
+            setError('No Server Response');
+        } else {
+            setError(err.response.data.error);
+        }
+    }
+}

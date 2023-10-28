@@ -5,6 +5,7 @@ import Switcher from '../../Switcher'
 import HeaderDropdown from '../../widgets/HeaderDropdown'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { AuthContext } from '../../context/AuthContex'
+import { Link } from 'react-router-dom'
 
 const PrivateHeader = () => {
 
@@ -21,7 +22,7 @@ const PrivateHeader = () => {
             <div className="w-full bg-red-800 z-40 flex sticky top-0 justify-between items-center px-5 py-4">
                 <div className='text-white font-bold text-sm md:text-lg'><span className='md:ml-[90px] lg:ml-[230px]'>Records Management Solution</span></div>
                 <div className='flex items-center space-x-3'>
-                    <span className='text-white text-sm md:text-lg'>Results</span>
+                    <Link to='/results'><span className='text-white text-sm md:text-lg'>Results</span></Link>
                     <span className='flex text-gray-200 p-1'>
                         <HiUserCircle size={25} />   
                         {drop ? <RiArrowDropUpLine size={25} onClick={showDropdown} className="cursor-pointer" /> : <RiArrowDropDownLine size={25} onClick={showDropdown}  className="cursor-pointer" />} 

@@ -141,3 +141,33 @@ export const result = async ( token, data, setResults, setError, setFiltering ) 
     setFiltering(false);
     
 }
+
+
+export const importDonations = async ( token, data, setSuccess, setError, setImporting ) => {
+
+    setImporting(true);
+
+    try{
+        const response = await axios.post('import-donations',
+            data,
+            {
+                headers: { 'Accept' : 'application/json', 'Authorization' : `Bearer ${token}` }
+            }
+        );
+        
+        console.log(response.data.success);
+        setSuccess(response.data.success);
+
+    }
+    catch (err) {
+        if (!err?.response) {
+            setError('No Response from Server');
+        } else {
+            console.log(err.response.data);
+            setError(err.response.data);
+        }
+    }
+
+    setImporting(false);
+    
+}
