@@ -104,7 +104,7 @@ const ExportMembers = () => {
                             >
                                 <div className='flex items-center space-x-1'>
                                     <AiOutlineFileExcel size={15} />
-                                    <span>Import Members</span>
+                                    <span>Import Donations</span>
                                 </div>
                             </button>
 
