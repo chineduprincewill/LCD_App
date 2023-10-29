@@ -32,7 +32,7 @@ const App = () => {
                 <Route exact path='/donations' element={<PrivateRoute><Donations /></PrivateRoute>} />
                 <Route exact path='/new-donation' element={<PrivateRoute><NewDonation /></PrivateRoute>} />
                 <Route exact path='/results' element={<PrivateRoute><Results /></PrivateRoute>} />
-                <Route exact path='/export-members' element={<PrivateRoute><ExportMembers /></PrivateRoute>} />
+                <Route exact path='/import-donations' element={<PrivateRoute><ExportMembers /></PrivateRoute>} />
               </Routes>
             </Router>
           </DataContextProvider>

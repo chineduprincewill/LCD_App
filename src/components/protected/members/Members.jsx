@@ -170,16 +170,6 @@ const Members = () => {
                                         data={members} 
                                         setItemsPerPage={setItemsPerPage}
                                     />
-
-                                    <button 
-                                        className='px-3 py-2.5 rounded-md border border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
-                                        onClick={() => navigate('/export-members')}
-                                    >
-                                        <div className='flex items-center space-x-1'>
-                                            <AiOutlineFileExcel size={15} />
-                                            <span>Export Members</span>
-                                        </div>
-                                    </button>
                                 </div>
                                 
                             }

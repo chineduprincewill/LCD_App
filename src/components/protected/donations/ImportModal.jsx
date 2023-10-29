@@ -3,10 +3,12 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaFileImport } from 'react-icons/fa';
 import { importDonations } from '../../../actions/donationsActions';
 import { AuthContext } from '../../../context/AuthContex';
+import { useNavigate } from 'react-router-dom';
 
 const ImportModal = ({ setImportModal }) => {
 
     const { token } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [doc, setDoc] = useState(null);
     const [error, setError] = useState(null);
@@ -38,6 +40,7 @@ const ImportModal = ({ setImportModal }) => {
         alert(success);
         setSuccess(null);
         setImportModal(false);
+        navigate('/donations');
     }
 
 

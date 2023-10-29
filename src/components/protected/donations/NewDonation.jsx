@@ -17,7 +17,6 @@ import { AuthContext } from '../../../context/AuthContex';
 import NextSearch from './NextSearch';
 import MemberDetail from '../members/MemberDetail';
 import DonationsLog from './DonationsLog';
-import ImportModal from './ImportModal';
 
 export const NewDonation = () => {
 
@@ -52,7 +51,6 @@ export const NewDonation = () => {
 
     const [currpayload, setCurrpayload] = useState({});
     const [payloadsArr, setPayloadsArr] = useState([]);
-    const [importModal, setImportModal] = useState(false);
 
     const restart = () => {
         setSearch('event');
@@ -211,7 +209,7 @@ export const NewDonation = () => {
                             <div className='flex items-center space-x-3'>
                                 <button 
                                     className='px-6 py-1.5 bg-green-700 hover:bg-green-900 text-white rounded-full'
-                                    onClick={(e) => toggleImportModal()}
+                                    onClick={(e) => navigate('/import-donations')}
                                 >
                                     Import from Excel
                                 </button>
@@ -378,7 +376,7 @@ export const NewDonation = () => {
             {newevent && <NeweventForm setForm={setNewevent} setIsCreated={setIsCreated} />}
             {newmember && <NewmemberForm setForm={setNewmember} setIsCreated={setIsCreated} />}
             {showdetail && <MemberDetail setShowdetail={setShowdetail} id={memberid} />}
-            {importModal && <ImportModal setImportModal={setImportModal} />}
+            
         </div>
     )
 }

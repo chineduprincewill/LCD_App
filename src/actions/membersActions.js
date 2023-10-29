@@ -161,7 +161,9 @@ export const deleteMember = async (token, id, setSuccess, setError ) => {
 }
 
 
-export const exportMembersToCSV = async (token, data, setSuccess, setError ) => {
+export const exportMembersToCSV = async (token, data, setSuccess, setError, setGenerating ) => {
+
+    setGenerating(true);
 
     try{
 
@@ -181,4 +183,6 @@ export const exportMembersToCSV = async (token, data, setSuccess, setError ) => 
             setError(err.response.data.error);
         }
     }
+
+    setGenerating(false);
 }
