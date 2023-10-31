@@ -1,22 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PrivateHeader from '../PrivateHeader'
 import Sidebar from '../sidebar/Sidebar'
 import Pagetitle from '../../../widgets/Pagetitle'
 import { AiOutlineCloseCircle, AiOutlineFileExcel } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import FilterMembers from '../../../widgets/FilterMembers'
-import { exportMembersToCSV } from '../../../actions/membersActions'
 import { AuthContext } from '../../../context/AuthContex'
 import ImportModal from '../donations/ImportModal'
-import { exportToExcel } from '../../../Hooks/functions'
 import ExportCSV from '../../../widgets/ExportXLSX'
 import FilterEvents from '../../../widgets/FilterEvents'
 import FilterYears from '../../../widgets/FilterYears'
 import { MdKeyboardBackspace } from 'react-icons/md'
 
 const ExportMembers = () => {
-
-    const { token } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -52,21 +48,6 @@ const ExportMembers = () => {
         let memobjArray = memberObj.filter(item => item?.member !== memid);
         setMemberObj(memobjArray);
     }
-
-    /**const exportToCSV = () => {
-
-        if(selected_members.length < 2){
-            alert('No member has been selected!')
-        }
-        else{
-            const data = {
-                selected_members
-            }
-    
-            //exportMembersToCSV(token, data, setSuccess, setError, setGenerating)
-            exportToExcel(excelData, 'members_export');
-        }
-    }*/
 
     useEffect(() => {
         if(!selected_members.includes(member)){
@@ -142,9 +123,9 @@ const ExportMembers = () => {
                             </Link>  
                         </div>
     
-                        <div className='w-full md:px-2 lg:px-4 my-6'>
+                        { (event !== '' && year !== '') && <div className='w-full md:px-2 lg:px-4 my-6'>
                              <FilterMembers setMember={setMember} setMemberName={setMemberName} isSuccessful={isSuccessful} setIsSuccessful={setIsSuccessful} />
-                        </div>
+                        </div>}
                         <div className='w-full md:flex md:justify-between space-y-4 md:space-y-0 mt-24 mb-4 md:px-2 lg:px-4'>
                             <div className='space-x-4'>
                                 <ExportCSV 
