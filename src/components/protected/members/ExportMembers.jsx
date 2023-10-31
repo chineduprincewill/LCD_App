@@ -47,6 +47,9 @@ const ExportMembers = () => {
 
         let memobjArray = memberObj.filter(item => item?.member !== memid);
         setMemberObj(memobjArray);
+
+        let excelArr = excelData.filter(item => item?.ID !== memid);
+        setExcelData(excelArr);
     }
 
     useEffect(() => {
