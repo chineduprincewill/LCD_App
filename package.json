@@ -17,6 +17,7 @@
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
+    "file-saver": "^2.0.5",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.4",
@@ -28,8 +29,11 @@
     "react-toggle-dark-mode": "^1.1.1",
     "recoil": "^0.7.7",
     "redux-form": "^8.3.10",
+    "sheetjs-style": "^0.15.8",
     "styled-components": "^6.1.0",
-    "typed.js": "^2.0.16"
+    "typed.js": "^2.0.16",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

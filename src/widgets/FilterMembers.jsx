@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { loadMembers } from '../actions/membersActions';
 import { AuthContext } from '../context/AuthContex';
 import { DataContext } from '../context/DataContext';
+import { useNavigate } from 'react-router-dom';
 
 export const FilterMembers = ({ setMember, clear, setMemberName, isSuccessful, setIsSuccessful }) => {
 
     const { token, logout } = useContext(AuthContext);
     const { record } = useContext(DataContext);
+
+    const navigate = useNavigate();
     
     const [members, setMembers] = useState(null);
     const [error, setError] = useState(null);
@@ -42,6 +45,17 @@ export const FilterMembers = ({ setMember, clear, setMemberName, isSuccessful, s
         }
     }, [members, filtered])
 
+    if(error !== null){
+        if(error === 'Token has expired'){
+            alert(error);
+            logout();
+            navigate('/login');
+        }
+        else{
+            alert(error);
+            setError(null);
+        }
+    }
 
     useEffect(() => {
 
@@ -62,10 +76,6 @@ export const FilterMembers = ({ setMember, clear, setMemberName, isSuccessful, s
             setIsSuccessful(false);
         }
 
-        if(error !== null){
-            alert(error);
-            setError(null);
-        }
     }, [token, clear, error, setMember, record, isSuccessful])
 
 
@@ -81,7 +91,8 @@ export const FilterMembers = ({ setMember, clear, setMemberName, isSuccessful, s
             <div className='relative inset-0 overflow-y-auto w-full z-20'>
                 <div className={`${filtered === '' ? 'hidden' : 'block'} bg-gray-100 dark:bg-gray-800 mt-0 p-2 text-gray-600 dark:text-gray-400 text-sm border-b border-x border-gray-200 dark:border-gray-900`}>
                     {
-                        members !== undefined ? 
+                        members === undefined || (error !== null && error === 'Token has expired') ? 
+                            logout() :
                             (filtered !== '' && (
                                 membersData !== null && 
                                     membersData.map(memdta => {
@@ -93,8 +104,7 @@ export const FilterMembers = ({ setMember, clear, setMemberName, isSuccessful, s
                                             {memdta.fullname}
                                         </p>
                                     })
-                            )) 
-                        : logout()  
+                            ))  
                     }
                 </div>
             </div>

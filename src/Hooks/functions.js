@@ -1,3 +1,6 @@
+import FileSaver from "file-saver";
+import XLSX from 'sheetjs-style';
+
 export const checkRole = (user, role, system_admin, system_auditor, admin, auditor, setNavlinks) => {
 
     if(user && user.groupid === 0 && role === 'admin'){
@@ -40,4 +43,17 @@ export const formatDateWithFullMonthName = (dt) => {
     const year = date.getFullYear();
   
     return `${monthNames[month]} ${day}, ${year}`;
+}
+
+
+export const exportToExcel = async ( excleData, fileName) => {
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const fileExtension = '.xlsx';
+
+    const ws = XLSX.utils.json_to_sheet(excleData);
+    const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+
 }
